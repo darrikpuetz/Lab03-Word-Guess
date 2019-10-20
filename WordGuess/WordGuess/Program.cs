@@ -1,17 +1,27 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace WordGuess
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Defining the text path.
+        /// </summary>
+        /// <param name="args"></param>
+        public static void Main(string[] args)
         {
-            string fileName = "../../../myFile.txt";
-            //WriteEntireFile(fileName);
-            //ReadArrayOfLines(fileName);
-            //ReadAllLines(fileName);
-            //AppendValuesInFile(fileName);
+            string filepath = "../../../myFile.txt";
+            StartAGame(filepath);
+
+        }
+        /// <summary>
+        /// Starting the game displaying the options to call other mehtods.
+        /// </summary>
+        /// <param name="path"></param>
+        public static string StartAGame(string path)
+        {
             bool pickAgain = true;
             while (pickAgain)
             {
@@ -29,16 +39,23 @@ namespace WordGuess
                 Console.WriteLine("1) Play Game");
                 Console.WriteLine("2) Admin");
                 Console.WriteLine("3) Exit");
-                Int32.TryParse(Console.ReadLine(), out int option);
+
+                Int32.TryParse(Console.ReadLine(),  out int option);
+                string choice = Console.ReadLine();
                 try
                 {
                     switch (option)
                     {
                         case 1:
+                            Console.Clear();
                             Console.WriteLine(" Welcome to the game.");
+                            GetAWord(path);
+                            pickAgain = false;
                             break;
                         case 2:
                             Console.WriteLine(" Welcome to the Admin section.");
+                            Console.Clear();
+                            Admin(path);
                             break;
                         case 3:
                             Console.WriteLine("Exit");
@@ -49,19 +66,25 @@ namespace WordGuess
                             Console.ReadKey();
                             break;
                     }
+                    return choice;
 
                 }
                 catch (Exception e)
                 {
 
                     Console.WriteLine(e.Message);
+                    return choice;
                 }
-
             }
-
+            return path;
         }
 
-        public static void Admin()
+        /// <summary>
+        /// Section of choices that allow the user to change/view words.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string Admin(string path)
         {
             bool pickAgain = true;
             while (pickAgain)
@@ -72,82 +95,98 @@ namespace WordGuess
                 Console.WriteLine("3) Remove Word");
                 Console.WriteLine("5) Exit Admin Menu");
                 Int32.TryParse(Console.ReadLine(), out int option);
+                string choice = Console.ReadLine();
                 try
                 {
                     switch (option)
                     {
                         case 1:
                             Console.WriteLine("These are the words available.");
+                            foreach (string word in ReadAllWords(path))
+                            {
+                                Console.WriteLine(word);
+                            }
                             break;
                         case 2:
                             Console.WriteLine("Enter a word to add.");
+                            string addWord = Console.ReadLine();
+                            Add(path, addWord);
                             break;
                         case 3:
                             Console.WriteLine("Enter a word to remove.");
                             break;
                         case 5:
                             Console.WriteLine("Exit");
-                            pickAgain = false;
+                            Console.Clear();
                             break;
                         default:
-                            Console.ReadKey();
+                            Console.Clear();
                             Environment.Exit(0);
                             break;
+                    
                     }
+                    return choice;
 
                 }
-                catch (Exception e)
+                catch (IOException e)
                 {
 
-                    Console.WriteLine(e.Message);
+                    return e.Message;
                 }
-
             }
+            return path;
         }
-        public static string MakeEntireFile(string path)
+        /// <summary>
+        /// Writing to the console the words that have been added.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="newWords"></param>
+        public static void WriteEntireFile(string path, string[] newWords)
         {
             using (StreamWriter makeWords = new StreamWriter(path))
             {
-                makeWords.WriteLine("kobe");
-                makeWords.WriteLine("lakers");
-                makeWords.WriteLine("dunk");
-                makeWords.WriteLine("basketball");
-                makeWords.WriteLine("fisher");
-                makeWords.WriteLine("championship");
+                try
+                {
+                    foreach (string word in newWords)
+                    {
+                        makeWords.WriteLine(word);
+                    }
+                }
+                catch (Exception)
+                {
 
+                    throw;
+                }
             }
         }
-        public static string WriteEntireFile(string path)
+        /// <summary>
+        /// Adding a word to the array of words found in the Admin section.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="addedWord"></param>
+        /// <returns></returns>
+        public static string Add(string path, string addedWord)
         {
-            using (StreamWriter makeWords = File.AppendText(path))
+            using (StreamWriter writing = File.AppendText(path))
             {
-                makeWords.WriteLine("added word");
-                return path;
+                writing.WriteLine(addedWord);
             }
+            return addedWord;
         }
 
-        public static void Delete(string path)
-        {
-            try
-            {
-                File.Delete(path);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        static void ReadAllLines(string path)
+        public static void ReadTheFile(string path)
         {
             try
             {
-                string allLines = File.ReadAllText(path);
+                string[] allLines = File.ReadAllLines(path);
                 for (int i = 0; i < allLines.Length; i++)
                 {
                     Console.WriteLine(allLines[i]);
                 }
+                foreach (string line in allLines)
+                {
+                    Console.WriteLine(line);
+                }
 
             }
             catch (Exception)
@@ -156,24 +195,80 @@ namespace WordGuess
                 throw;
             }
         }
-
-
-
-        //static void ReadArrayOfLines(string path)
-        //{
-        //    string[] lines = File.ReadAllLines(path);
-        //    foreach (string line in lines)
-        //    {
-        //        Console.WriteLine(line);
-        //    }
-        //}
-
-        static void AppendValuesInFile(string path)
+        /// <summary>
+        /// Randomly generating an array of letters based on the word that chosen.
+        /// </summary>
+        /// <param name="path"></param>
+        public static void GetAWord(string path)
         {
-            string[] newLines = { "", "KyungRae", "likes", "gogurt" };
-            File.AppendAllLines(path, newLines);
+            try
+            {
+                Random randomword = new Random();
+                string[] allTheWords = ReadAllWords(path);
+                int randomWordPicked = randomword.Next(allTheWords.Length);
+                string wordPicked = allTheWords[randomWordPicked];
+                string[] underScores = new string[wordPicked.Length];
+                bool finished = false;
+                string alreadyGuessed = "";
 
-            File.AppendAllText(path, "Also, he likes sweet potatoes");
+                for (int i = 0; i < underScores.Length; i++)
+                {
+                    underScores[i] = " _ ";
+                    Console.WriteLine(underScores[i]);
+                }
+                while (!finished)
+                {
+                    Console.WriteLine("Try guessing a letter.");
+                    string gameInput = Console.ReadLine();
+                    alreadyGuessed += gameInput;
+                    for (int i = 0; i < underScores.Length; i++)
+                    {
+                        bool compareValue = string.Equals(underScores[i], gameInput, StringComparison.CurrentCultureIgnoreCase);
+                        if (compareValue)
+                        {
+                            underScores[i] = gameInput;
+                        }
+                    }
+                    if (wordPicked.Contains(gameInput))
+                    {
+                        for (int i = 0; i < wordPicked.Length; i++)
+                        {
+                            if (wordPicked[i].ToString() == gameInput)
+                            {
+                                underScores[i] = gameInput;
+                            }
+                        }
+                    }
+                    Console.WriteLine($"You guessed: {alreadyGuessed}");
+                    foreach (string letter in underScores)
+                    {
+                        Console.WriteLine(letter);
+                    }
+                    if (!underScores.Contains(" _ "))
+                    {
+                        Console.WriteLine("Congrats you animal!");
+                        finished = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        /// <summary>
+        /// Reading the words that were made within the text file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+
+        public static string[] ReadAllWords(string path)
+        {
+            string[] allWords = File.ReadAllLines(path);
+            Console.WriteLine($"{allWords}");
+            return allWords;
         }
     }
 }
