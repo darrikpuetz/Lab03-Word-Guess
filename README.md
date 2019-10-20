@@ -1,7 +1,7 @@
 # Numbers-Game
 
 
-## Lab02 Unit Testing
+## Lab03 Word Guess
 
 *Author: Darrik Puetz*
 
@@ -9,25 +9,24 @@
 
 ## Description
 
-This is a C# console application is an ATM application that using the user input to change the "balance" of the account. You can add/remove a certain amount from that balance. If the 
-
+The main idea of the game is she must guess what a mystery word is by inputting (1) letter at a time. The game should save all of her guesses (both correct and incorrect) throughout each session of the game, along with the ability to show her how many letters out of the word she has guessed correctly.
 ---
 
 ### Getting Started
 Clone this repository to your local machine.
 
 ```
-$ git clone https://github.com/darrikpuetz/Lab-02-Unit-Testing.git
+$ git clone https://github.com/darrikpuetz/Lab03-Word-Guess.git
 ```
 
 ### To run the program from Visual Studio:
-Select ```File``` -> ```Open``` -> ```Lab 02 Unit Testing```
+Select ```File``` -> ```Open``` -> ```Lab 03 Word Guess```
 
 Next navigate to the location you cloned the Repository.
 
-Double click on the ```Lab 02 Unit Testing``` directory.
+Double click on the ```Lab 03 Word Guess``` directory.
 
-Then select and open ```Lab 02 Unit Testing.sln```
+Then select and open ```Lab 03 Word Guess.sln```
 
 ---
 
@@ -35,16 +34,25 @@ Then select and open ```Lab 02 Unit Testing.sln```
 ### Visuals
 
 #### Application Start
-![Image 1](https://via.placeholder.com/750x500)
+![Start](https://via.placeholder.com/750x500)
 #### Using the Application
-![Image 1](https://via.placeholder.com/750x500)
+![Using](https://via.placeholder.com/750x500)
+![Still Using](https://via.placeholder.com/750x500)
 #### Application End
-![Image 1](https://via.placeholder.com/750x500)
+![Admin](https://via.placeholder.com/750x500)
 
 ---
 
 ### Change Log
-1.1: Finished the original version - 16 OCT 2019  
+1.1: Finished the original version with missing remove word method- 19 OCT 2019  
+
+### Credit 
+1. [System I.O.] https://docs.microsoft.com/en-us/dotnet/standard/io/index
+2. [Stream Writer] https://docs.microsoft.com/en-us/dotnet/api/system.io.streamwriter?view=netframework-4.8
+3. [Stream Reader] https://docs.microsoft.com/en-us/dotnet/api/system.io.stringreader?view=netframework-4.8
+4. [Using Stream] https://introprogramming.info/english-intro-csharp-book/read-online/chapter-15-text-files/
+
+
 
 
 ------------------------------

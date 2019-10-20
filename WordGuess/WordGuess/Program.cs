@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace WordGuess
 {
-    class Program
+    public class Program
     {
         /// <summary>
         /// Defining the text path.
@@ -20,7 +20,7 @@ namespace WordGuess
         /// Starting the game displaying the options to call other mehtods.
         /// </summary>
         /// <param name="path"></param>
-        public static void StartAGame(string path)
+        public static string StartAGame(string path)
         {
             bool pickAgain = true;
             while (pickAgain)
@@ -39,7 +39,9 @@ namespace WordGuess
                 Console.WriteLine("1) Play Game");
                 Console.WriteLine("2) Admin");
                 Console.WriteLine("3) Exit");
-                Int32.TryParse(Console.ReadLine(), out int option);
+
+                Int32.TryParse(Console.ReadLine(),  out int option);
+                string choice = Console.ReadLine();
                 try
                 {
                     switch (option)
@@ -64,18 +66,25 @@ namespace WordGuess
                             Console.ReadKey();
                             break;
                     }
+                    return choice;
 
                 }
                 catch (Exception e)
                 {
 
                     Console.WriteLine(e.Message);
+                    return choice;
                 }
             }
+            return path;
         }
 
-
-        public static void Admin(string path)
+        /// <summary>
+        /// Section of choices that allow the user to change/view words.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string Admin(string path)
         {
             bool pickAgain = true;
             while (pickAgain)
@@ -86,6 +95,7 @@ namespace WordGuess
                 Console.WriteLine("3) Remove Word");
                 Console.WriteLine("5) Exit Admin Menu");
                 Int32.TryParse(Console.ReadLine(), out int option);
+                string choice = Console.ReadLine();
                 try
                 {
                     switch (option)
@@ -113,18 +123,24 @@ namespace WordGuess
                             Console.Clear();
                             Environment.Exit(0);
                             break;
+                    
                     }
+                    return choice;
 
                 }
-                catch (Exception e)
+                catch (IOException e)
                 {
 
-                    Console.WriteLine(e.Message);
+                    return e.Message;
                 }
-
             }
+            return path;
         }
-
+        /// <summary>
+        /// Writing to the console the words that have been added.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="newWords"></param>
         public static void WriteEntireFile(string path, string[] newWords)
         {
             using (StreamWriter makeWords = new StreamWriter(path))
@@ -143,7 +159,12 @@ namespace WordGuess
                 }
             }
         }
-
+        /// <summary>
+        /// Adding a word to the array of words found in the Admin section.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="addedWord"></param>
+        /// <returns></returns>
         public static string Add(string path, string addedWord)
         {
             using (StreamWriter writing = File.AppendText(path))
@@ -151,18 +172,6 @@ namespace WordGuess
                 writing.WriteLine(addedWord);
             }
             return addedWord;
-        }
-        public static void Delete(string path)
-        {
-            try
-            {
-                File.Delete(path);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
 
         public static void ReadTheFile(string path)
@@ -186,7 +195,10 @@ namespace WordGuess
                 throw;
             }
         }
-
+        /// <summary>
+        /// Randomly generating an array of letters based on the word that chosen.
+        /// </summary>
+        /// <param name="path"></param>
         public static void GetAWord(string path)
         {
             try
@@ -246,10 +258,16 @@ namespace WordGuess
             }
 
         }
+        /// <summary>
+        /// Reading the words that were made within the text file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
 
         public static string[] ReadAllWords(string path)
         {
             string[] allWords = File.ReadAllLines(path);
+            Console.WriteLine($"{allWords}");
             return allWords;
         }
     }
