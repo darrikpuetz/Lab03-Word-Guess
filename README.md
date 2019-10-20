@@ -34,12 +34,12 @@ Then select and open ```Lab 03 Word Guess.sln```
 ### Visuals
 
 #### Application Start
-![Start](https://via.placeholder.com/750x500)
+![Start](https://github.com/darrikpuetz/Lab03-Word-Guess/blob/master/WordGuess/Assets/Start.PNG)
 #### Using the Application
-![Using](https://via.placeholder.com/750x500)
-![Still Using](https://via.placeholder.com/750x500)
+![Using](https://github.com/darrikpuetz/Lab03-Word-Guess/blob/master/WordGuess/Assets/playing.PNG)
+![Still Using](https://github.com/darrikpuetz/Lab03-Word-Guess/blob/master/WordGuess/Assets/stillplaying.PNG)
 #### Application End
-![Admin](https://via.placeholder.com/750x500)
+![Admin](https://github.com/darrikpuetz/Lab03-Word-Guess/blob/master/WordGuess/Assets/Admin.PNG)
 
 ---
 
@@ -47,10 +47,10 @@ Then select and open ```Lab 03 Word Guess.sln```
 1.1: Finished the original version with missing remove word method- 19 OCT 2019  
 
 ### Credit 
-1. [System I.O.] https://docs.microsoft.com/en-us/dotnet/standard/io/index
-2. [Stream Writer] https://docs.microsoft.com/en-us/dotnet/api/system.io.streamwriter?view=netframework-4.8
-3. [Stream Reader] https://docs.microsoft.com/en-us/dotnet/api/system.io.stringreader?view=netframework-4.8
-4. [Using Stream] https://introprogramming.info/english-intro-csharp-book/read-online/chapter-15-text-files/
+1. [System I.O.] (https://docs.microsoft.com/en-us/dotnet/standard/io/index)
+2. [Stream Writer] (https://docs.microsoft.com/en-us/dotnet/api/system.io.streamwriter?view=netframework-4.8)
+3. [Stream Reader] (https://docs.microsoft.com/en-us/dotnet/api/system.io.stringreader?view=netframework-4.8)
+4. [Using Stream] (https://introprogramming.info/english-intro-csharp-book/read-online/chapter-15-text-files/)
 
 
 
