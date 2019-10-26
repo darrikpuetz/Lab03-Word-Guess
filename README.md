@@ -34,12 +34,12 @@ Then select and open ```Lab 03 Word Guess.sln```
 ### Visuals
 
 #### Application Start
-![Start](https://via.placeholder.com/750x500)
+![Start](https://github.com/darrikpuetz/Lab03-Word-Guess/blob/master/WordGuess/Assets/Start.PNG)
 #### Using the Application
-![Using](https://via.placeholder.com/750x500)
-![Still Using](https://via.placeholder.com/750x500)
+![Using](https://github.com/darrikpuetz/Lab03-Word-Guess/blob/master/WordGuess/Assets/playing.PNG)
+![Still Using](https://github.com/darrikpuetz/Lab03-Word-Guess/blob/master/WordGuess/Assets/stillplaying.PNG)
 #### Application End
-![Admin](https://via.placeholder.com/750x500)
+![Admin](https://github.com/darrikpuetz/Lab03-Word-Guess/blob/master/WordGuess/Assets/Admin.PNG)
 
 ---
 
@@ -49,6 +49,11 @@ Then select and open ```Lab 03 Word Guess.sln```
 
 ### Credit 
 Help from Chris Cummings Huge Brain
+=======
+1. [SystemIO] (https://docs.microsoft.com/en-us/dotnet/standard/io/index)
+2. [StreamWriter] (https://docs.microsoft.com/en-us/dotnet/api/system.io.streamwriter?view=netframework-4.8)
+3. [StreamReader] (https://docs.microsoft.com/en-us/dotnet/api/system.io.stringreader?view=netframework-4.8)
+4. [UsingStream] (https://introprogramming.info/english-intro-csharp-book/read-online/chapter-15-text-files/)
 
 
 
