@@ -45,12 +45,10 @@ Then select and open ```Lab 03 Word Guess.sln```
 
 ### Change Log
 1.1: Finished the original version with missing remove word method- 19 OCT 2019  
+1.2: Completed remove method and unit test for char. 26 OCT 2019  
 
 ### Credit 
-1. [System I.O.] https://docs.microsoft.com/en-us/dotnet/standard/io/index
-2. [Stream Writer] https://docs.microsoft.com/en-us/dotnet/api/system.io.streamwriter?view=netframework-4.8
-3. [Stream Reader] https://docs.microsoft.com/en-us/dotnet/api/system.io.stringreader?view=netframework-4.8
-4. [Using Stream] https://introprogramming.info/english-intro-csharp-book/read-online/chapter-15-text-files/
+Help from Chris Cummings Huge Brain
 
 
 

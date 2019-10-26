@@ -20,7 +20,7 @@ namespace WordGuess
         /// Starting the game displaying the options to call other mehtods.
         /// </summary>
         /// <param name="path"></param>
-        public static string StartAGame(string path)
+        public static bool StartAGame(string path)
         {
             bool pickAgain = true;
             while (pickAgain)
@@ -40,8 +40,7 @@ namespace WordGuess
                 Console.WriteLine("2) Admin");
                 Console.WriteLine("3) Exit");
 
-                Int32.TryParse(Console.ReadLine(),  out int option);
-                string choice = Console.ReadLine();
+                Int32.TryParse(Console.ReadLine(), out int option);
                 try
                 {
                     switch (option)
@@ -66,17 +65,17 @@ namespace WordGuess
                             Console.ReadKey();
                             break;
                     }
-                    return choice;
+                    return true;
 
                 }
                 catch (Exception e)
                 {
 
                     Console.WriteLine(e.Message);
-                    return choice;
+                    return false;
                 }
             }
-            return path;
+            return true;
         }
 
         /// <summary>
@@ -84,7 +83,7 @@ namespace WordGuess
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string Admin(string path)
+        public static bool Admin(string path)
         {
             bool pickAgain = true;
             while (pickAgain)
@@ -95,7 +94,6 @@ namespace WordGuess
                 Console.WriteLine("3) Remove Word");
                 Console.WriteLine("5) Exit Admin Menu");
                 Int32.TryParse(Console.ReadLine(), out int option);
-                string choice = Console.ReadLine();
                 try
                 {
                     switch (option)
@@ -106,14 +104,25 @@ namespace WordGuess
                             {
                                 Console.WriteLine(word);
                             }
+                            StartAGame(path);
                             break;
                         case 2:
                             Console.WriteLine("Enter a word to add.");
                             string addWord = Console.ReadLine();
                             Add(path, addWord);
+                            StartAGame(path);
                             break;
                         case 3:
+                            foreach (string word in ReadAllWords(path))
+                            {
+                                Console.WriteLine(word);
+                            }
                             Console.WriteLine("Enter a word to remove.");
+                            string removeWord = Console.ReadLine();
+                            Remove(removeWord, path);
+                            Console.WriteLine($"{removeWord} was removed. ");
+                            StartAGame(path);
+
                             break;
                         case 5:
                             Console.WriteLine("Exit");
@@ -123,18 +132,18 @@ namespace WordGuess
                             Console.Clear();
                             Environment.Exit(0);
                             break;
-                    
+
                     }
-                    return choice;
+                    return true;
 
                 }
                 catch (IOException e)
                 {
-
-                    return e.Message;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
             }
-            return path;
+            return true;
         }
         /// <summary>
         /// Writing to the console the words that have been added.
@@ -267,8 +276,67 @@ namespace WordGuess
         public static string[] ReadAllWords(string path)
         {
             string[] allWords = File.ReadAllLines(path);
-            Console.WriteLine($"{allWords}");
             return allWords;
         }
+
+        public static string Remove(string word, string path)
+        {
+            Console.Clear();
+            try
+            {
+                string[] wordArr = File.ReadAllLines(path);
+                string[] newArr = new string[wordArr.Length];
+                bool deletedTheWord = false;
+                using (StreamWriter writer = File.CreateText(path))
+                {
+                    int count = 0;
+                    for (int i = 0; i < wordArr.Length; i++)
+                    {
+                        if (word == wordArr[i])
+                        {
+                            deletedTheWord = true;
+                        }
+                        else
+                        {
+                            newArr[count] = wordArr[i];
+                            count++;
+                        }
+                    }
+                    if (deletedTheWord)
+                    {
+                        for (int i = 0; i < newArr.Length; i++)
+                        {
+                            writer.WriteLine(newArr[i]);
+                        }
+                    }
+                    return word;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                string nope = "Didn't Work";
+                return nope;
+            }
+        }
+        public static string ShowWords(string path)
+        {
+            string file = File.ReadAllText(path);
+                return file;
+        }
+        public static bool LetterGuess(char letter, string word)
+        {
+            if(word.Contains(letter))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
+
 }
