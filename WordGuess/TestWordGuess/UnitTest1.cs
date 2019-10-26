@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 using static WordGuess.Program;
+using System.IO;
 
 
 
@@ -12,27 +14,35 @@ namespace TestWordGuess
         public void Addtest()
         {
             string whoop = "whoop";
-            string path = "../../../myFile.txt"; 
+            string path = "../../../myFile.txt";
             Assert.Equal(whoop, Add(path, whoop));
 
         }
         [Fact]
         public void ReadAllWordsTest()
         {
-            string[] path =  new string [3] { "yeet", "hello", "why" };
-            Assert.Equal(path, ReadAllWords(path[3]));
+            string path = "../../../myFile.txt";
+            Assert.Equal(File.ReadAllText(path), ShowWords(path));
+
+        }
+
+
+        [Fact]
+        public void DoesLetterExist()
+        {
+            string word = "yeet";
+            char letter = 'e';
+            Assert.True(LetterGuess(letter, word));
 
         }
         [Fact]
-        public void StartAGameTest()
+        public void DoesLetterNotExist()
         {
-            string path = "myFile.txt";
-            string wrongpath = "../../../myFile.txt";
-
-            Assert.NotEqual(wrongpath, StartAGame(path));
+            string word = "yeet";
+            char letter = 'o';
+            Assert.False(LetterGuess(letter, word));
 
         }
-
 
     }
 }

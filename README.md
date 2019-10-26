@@ -45,8 +45,11 @@ Then select and open ```Lab 03 Word Guess.sln```
 
 ### Change Log
 1.1: Finished the original version with missing remove word method- 19 OCT 2019  
+1.2: Completed remove method and unit test for char. 26 OCT 2019  
 
 ### Credit 
+Help from Chris Cummings Huge Brain
+=======
 1. [SystemIO] (https://docs.microsoft.com/en-us/dotnet/standard/io/index)
 2. [StreamWriter] (https://docs.microsoft.com/en-us/dotnet/api/system.io.streamwriter?view=netframework-4.8)
 3. [StreamReader] (https://docs.microsoft.com/en-us/dotnet/api/system.io.stringreader?view=netframework-4.8)
